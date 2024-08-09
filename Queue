@@ -3,8 +3,9 @@ int isFull();
 int isEmpty();
 void Insert();
 void Delete();
-void pop();
+void pop(int);
 void Display();
+void Front();
 int arr[50] = {0},n;
 int top = -1;
 int main()
@@ -14,9 +15,9 @@ int main()
 	printf("Enter size of queue: ");
 	scanf("%d",&n);
 	
-	while(choice!=4)
+	while(choice!=5)
 	{
-		printf("\n1. Insert\n2. Delete\n3. Display\n4. Exit\n");
+		printf("\n1. Insert\n2. Delete\n3. Display\n4. Front\n5. Exit\n");
 		scanf("%d",&choice);
 		switch(choice)
 		{
@@ -36,6 +37,11 @@ int main()
 				break;
 			}
 			case 4:
+			{
+				Front();
+				break;
+			}
+			case 5:
 				break;
 			default: 
 				printf("Invalid input.");
@@ -94,7 +100,7 @@ void Insert()
 
 void Delete()
 {
-	int num, i, j;
+	int num, i;
 	
 	if(isEmpty())
 	{
@@ -113,15 +119,9 @@ void Delete()
 	}
 	else
 	{	
-		
-		for(i=0;i<n;i++)
-		{
-			//printf("Deleted element %d: %d\n",i+1,arr[i]);	
-			arr[i] = arr[i+1];
-		}
 		for(i=0;i<num;i++)
 		{
-			top--;
+			pop(num);
 		}
 	}
 	Display();
@@ -138,16 +138,23 @@ void Display()
 	printf("\n");
 }
 
-void pop()
+void pop(int num)
 {
-	int i
+	int i;
 	for(i=0;i<n;i++)
 	{
 		//printf("Deleted element %d: %d\n",i+1,arr[i]);	
 		arr[i] = arr[i+1];
 	}
-	for(i=0;i<num;i++)
+	top--;
+}
+
+void  Front()
+{
+	if(isEmpty())
 	{
-		top--;
+		printf("Queue is empty.");
+		return;
 	}
+	printf("The element at front: %d",arr[0]);
 }
