@@ -1,16 +1,20 @@
 #include<stdio.h>
 #include<ctype.h>
 #define Max 50
+
 void push(char, char [], int *);
 void pop(char);
 void OprtMngr(char);
 int OprtCmp(char, char);
+
 char Stack[Max] = {0}, Postf[Max] = {0} , Exp[Max] = {0};
 int TOS = -1, TOPF = -1;
-void main()
+
+int main()
 {
     int i,j;
-
+    
+    start:
     printf("Enter the expression: ");
     scanf("%s",Exp);
 
@@ -45,6 +49,7 @@ void main()
                     }
                     break;
                 }
+
                 case ']':
                 {
                     for(j=TOS;j>=0;j--)
@@ -56,7 +61,9 @@ void main()
                         }
                         pop(Stack[j]);
                     }
+                    break;
                 }
+
                 case '}':
                 {
                     for(j=TOS;j>=0;j--)
@@ -68,32 +75,35 @@ void main()
                         }
                         pop(Stack[j]);
                     }
+                    break;
                 }
+                
                 default: 
-                    printf("FUCKED");
+                {
+                    printf("Invalid expression.");
+                    goto start;
+                }
             }
         }
     }
+
     for(i=TOS;i>=0;i--)
     {
         pop(Stack[i]);
     }
-    printf("\n");
-    for(i=0;i<10;i++)
-    {
-        printf("%c",Stack[i]);
-    }
-    printf("\n");
+
+    printf("\nPostfix Expression: ");
     for(i=0;i<=TOPF;i++)
     {
         printf("%c",Postf[i]);
     }
+    
+    return 0;
 }
-
+	
 void push(char inp, char arr[], int *top)
 {
     arr[++(*top)] = inp;
-    printf("%d %d %c\n",TOS,TOPF,inp);
 }
 
 void pop(char inp)
