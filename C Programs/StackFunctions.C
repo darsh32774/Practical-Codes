@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #define Max 10
 int top=-1;
@@ -86,7 +87,7 @@ void pop()
 	where:
 	printf("Enter number of elements to be popped: ");
 	scanf("%d",&n);
-	if(n>top)
+	if(n-1>top)
 	{
 	printf("Number exceeds size of stack.\n\n");
 	goto where;
@@ -134,7 +135,8 @@ void display()
 	printf("Stack is empty.");
 	return;
 	}
+     printf("\nSTACK:\n");
 	//printf("\n");
 	for(i=top;i>=0;i--)
-	printf("%d\n",Stack[i]);
+	printf("element %d:\t%d\n",i+1,Stack[i]);
 }
