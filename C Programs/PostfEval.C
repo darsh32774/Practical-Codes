@@ -32,14 +32,7 @@ void Evaluate()
           }
           else
           {
-               if((isalnum(Stack[top--]))&&(isalnum(Stack[top++])))
-               {
-                    Pop(Exp[i]);
-               }
-               else
-               {
-                    Push(Exp[i], Stack);
-               }
+               Pop(Exp[i]);
           }
      }
 }
