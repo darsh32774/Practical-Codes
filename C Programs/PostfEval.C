@@ -1,31 +1,94 @@
 #include<stdio.h>
-#include<string.h>
-#include<math.h>
 #include<ctype.h>
+#include<math.h>
+#define Max 1000
 
-void Push(int);
+char Exp[Max] = {0}, Stack[Max] = {0};
+int i, top = -1;
+double result;
 
-char Exp[50];
-int Stack[50], top = -1;
+void Evaluate();
+void Push(char, char []);
+void Pop(char);
 
 int main()
 {
-	int ans, i;
-     
-	printf("Enter the expression: ");
-	scanf("%s",Exp);
-     
-	for(i = 0; Exp[i] != '\0'; i++)
-	{
-		if(isalnum(Exp[i]))
-			Push(Exp[i] - '0');
-		
-	}
-     
-	return 0;
+     printf("Enter the expression: ");
+     scanf("%s",Exp);
+
+     Evaluate();
+     printf("Answer: %f",result);
+
+     return 1;
 }
 
-void Push(int inp)
+void Evaluate()
 {
-	Stack[++top] = inp;
+     for(i=0;Exp[i]!='\0';i++)
+     {
+          if(isalnum(Exp[i]))
+          {
+               Push(Exp[i], Stack);
+          }
+          else
+          {
+               if((isalnum(Stack[top--]))&&(isalnum(Stack[top++])))
+               {
+                    Pop(Exp[i]);
+               }
+               else
+               {
+                    Push(Exp[i], Stack);
+               }
+          }
+     }
+}
+
+void Push(char inp, char arr[])
+{
+     arr[++top] = inp;
+}
+
+void Pop(char inp)
+{
+     int lopt, ropt;
+     char temp;
+
+     ropt = Stack[top--] - '0';
+     lopt = Stack[top--] - '0';
+
+     switch(inp)
+     {
+          case '+':
+               result = lopt + ropt;
+               temp = result + '0';
+               break;
+          
+          case '-':
+               result = lopt - ropt;
+               temp = result + '0';
+               break;
+          
+          case '*':
+               result = lopt * ropt;
+               temp = result + '0';
+               break;
+          
+          case '/':
+               result = lopt / ropt;
+               temp = result + '0';
+               break;
+          
+          case '^':
+               result = pow(lopt,ropt);
+               temp = result + '0';
+               break;
+          
+          case '%':
+               result = lopt % ropt;
+               temp = result + '0';
+               break;
+     }
+
+     Push(temp, Stack);
 }
