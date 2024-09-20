@@ -1,52 +1,77 @@
-
 #include<stdio.h>
 #define Max 10
-int top=-1;
-int Stack[Max]={0};
+
+int top=-1, Stack[Max]={0};
+
 int isEmpty();
 int isFull();
 void push();
 void pop();
 void peek();
 void display();
+
 int main()
 {
-	int choice;
-	here:
-	printf("\n\n1.Push\n2.Pop\n3.Peek\n4.Check if Full\n5.Check if empty\n6.Display\n7.Exit");
-	scanf("%d",&choice);
+	int choice = 0;
 	
-	switch(choice)
+	while(choice!=7)
 	{
-		case 1:
-			push();
-			goto here;
-		case 2:
-			pop();
-			goto here;
-		case 3:
-			peek();
-			goto here;
-		case 4:
-			if(isFull())
-			printf("Stack is full.");
-			else
-			printf("Stack is not full.");
-			goto here;
-		case 5:
-			if(isEmpty())
-			printf("Stack is empty.");
-			else
-			printf("Stack is not empty.");
-			goto here;
-		case 6:
-			display();
-			goto here;
-		case 7:
-			return 0;
-		default: 
-			printf("Invalid input.");
-			goto here;
+	    printf("\n\n1.Push\n2.Pop\n3.Peek\n4.Check if Full\n5.Check if empty\n6.Display\n7.Exit");
+        scanf("%d",&choice);    
+	    
+    	switch(choice)
+    	{
+        	case 1:
+        	{
+    	    	push();
+    		    break;
+        	}
+        	
+        	case 2:
+        	{
+        		pop();
+    	    	break;
+        	}
+    		
+    		case 3:
+    		{
+    			peek();
+    			break;
+    		}
+    		
+    		case 4:
+    		{
+    			if(isFull())
+        			printf("Stack is full.");
+    			else
+        			printf("Stack is not full.");
+        		break;
+	    	}
+		
+    		case 5:
+    	    {
+    			if(isEmpty())
+            		printf("Stack is empty.");
+    			else
+            		printf("Stack is not empty.");
+    			break;
+    	    }
+	    
+        	case 6:
+        	{
+        		display();
+        		break;
+        	}
+		
+    		case 7:
+    			return 0;
+    		
+    		default: 
+    		{
+    		    printf("Invalid input.");
+    			break;
+    		}
+    	}
 	}
 	return 0;
 }
